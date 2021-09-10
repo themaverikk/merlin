@@ -3,14 +3,13 @@ CXXFLAGS=-g -std=c++17
 
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:%.cpp=%.o)
+current_dir=$(shell pwd)
 
-
-%.o: %.c
-	$(CXX) $@ -c $< $(CXXFLAGS)
+%.o: %.cpp
+	@$(CXX) $(CXXFLAGS)  -c $< -o $(current_dir)/out/$@
 
 all: $(OBJ)
-	$(CXX) -o $^ $(CXXFLAGS)
-
+	@tput setaf 2; echo "BUILD COMPLETE."
 
 clean:
-	rm -f *.o
+	rm -f bin/*.o
