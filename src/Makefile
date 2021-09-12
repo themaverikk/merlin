@@ -3,14 +3,17 @@ CXXFLAGS=-g -std=c++17
 
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:%.cpp=%.o)
+current_dir=$(shell pwd)
 
+%.o: %.cpp
+	@$(CXX) $(CXXFLAGS) $< -o $(current_dir)/out/$@
 
-%.o: %.c
-	$(CXX) $@ -c $< $(CXXFLAGS)
+all: createOutputDir $(OBJ) 
+	@tput setaf 2; echo "BUILD COMPLETE."
 
-all: $(OBJ)
-	$(CXX) -o $^ $(CXXFLAGS)
-
+createOutputDir:
+	@if [ ! -d $(current_dir)/out ]; then  mkdir $(current_dir)/out;fi
 
 clean:
-	rm -f *.o
+	@rm -f out/*.o
+	@tput setaf 2; echo "CLEANING COMPLETE."
