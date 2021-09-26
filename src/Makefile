@@ -15,5 +15,5 @@ createOutputDir:
 	@if [ ! -d $(current_dir)/out ]; then  mkdir $(current_dir)/out;fi
 
 clean:
-	@rm -f out/*.o
+	@rm -rf out/*
 	@tput setaf 2; echo "CLEANING COMPLETE."

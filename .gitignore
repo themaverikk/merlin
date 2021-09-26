@@ -34,3 +34,7 @@
 # vscode
 .vscode/
 .history/
+
+# os x
+*.dSYM
+.DS_STORE
