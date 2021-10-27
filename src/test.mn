@@ -1,0 +1,8 @@
+
+    foo = 1.5;
+    someFunction("someText",45-70*9+89);
+    foo = 8+9+0;
+
+fn someFunction() {
+    ss = "knrfwkrf";
+}
