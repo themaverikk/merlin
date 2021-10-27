@@ -38,3 +38,8 @@
 # os x
 *.dSYM
 .DS_STORE
+
+# merlin files
+*.mn
+merlin
+!test.mn
