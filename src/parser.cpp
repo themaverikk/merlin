@@ -375,16 +375,16 @@ optional<Statement> Parser::expectExpression()
             --mCurrentToken;
             return lhs;
         }
-
-        Statement *rightmostStatement = findRightmostStatement(&lhs.value(), rhsPrecedence);
-        if (rightmostStatement)
+        // get the righmost statement in lhs if rhspresedence is high to do modification according to precedence and  get the right structure
+        Statement *rightmostStatementInLhs = findRightmostStatementInLhs(&lhs.value(), rhsPrecedence);
+        if (rightmostStatementInLhs)
         {
             Statement operatorCall;
             operatorCall.mKind = StatementKind::OPERATOR_CALL;
             operatorCall.mName = op->mText;
-            operatorCall.mParameters.push_back(rightmostStatement->mParameters.at(1));
+            operatorCall.mParameters.push_back(rightmostStatementInLhs->mParameters.at(1));
             operatorCall.mParameters.push_back(rhs.value());
-            rightmostStatement->mParameters[1] = operatorCall;
+            rightmostStatementInLhs->mParameters[1] = operatorCall;
         }
         else
         {
@@ -400,7 +400,7 @@ optional<Statement> Parser::expectExpression()
     return lhs;
 }
 
-Statement *Parser::findRightmostStatement(Statement *lhs, size_t rhsPrecedence)
+Statement *Parser::findRightmostStatementInLhs(Statement *lhs, size_t rhsPrecedence)
 {
     if (lhs->mKind != StatementKind::OPERATOR_CALL)
     {
@@ -412,7 +412,7 @@ Statement *Parser::findRightmostStatement(Statement *lhs, size_t rhsPrecedence)
     }
 
     Statement *rhs = &lhs->mParameters.at(1);
-    rhs = findRightmostStatement(rhs, rhsPrecedence);
+    rhs = findRightmostStatementInLhs(rhs, rhsPrecedence);
     if (rhs == nullptr)
     {
         return lhs;

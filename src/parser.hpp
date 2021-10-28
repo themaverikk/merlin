@@ -50,6 +50,6 @@
 
         size_t operatorPrecedence(const string &operatorName);
 
-        Statement *findRightmostStatement(Statement *lhs, size_t rhsPrecedence);
+        Statement *findRightmostStatementInLhs(Statement *lhs, size_t rhsPrecedence);
     };
 
