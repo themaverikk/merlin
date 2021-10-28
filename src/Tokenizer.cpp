@@ -41,7 +41,6 @@ vector<Token> Tokenizer::parse(const std::string &inProgram)
         {
             currentToken.mType = OPERATOR;
             endToken(currentToken, tokens);
-            continue;
         }
 
         switch (currCh)
