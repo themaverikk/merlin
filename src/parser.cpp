@@ -49,7 +49,7 @@ bool Parser::expectFunctionDefinition()
                 }
                 if (!expectOperator(",").has_value())
                 {
-                    throw runtime_error("Expected ',' to separate parameters or ')' to indicate end of argument list.");
+                    throw runtime_error("Expected ',' to separate parameters or ')' to indicate end of argument list.at line no " + to_string(mCurrentToken->mLineNumber));
                 }
             }
 
@@ -90,7 +90,7 @@ bool Parser::parseMainFunction()
     mFunctions["main"].mStatements.push_back(statement.value());
     if (!expectOperator(";").has_value())
     {
-        throw runtime_error("Expected ';' at end of statement.");
+        throw runtime_error("Expected ';' at end of statement.at line no " + to_string(mCurrentToken->mLineNumber));
     }
     return true;
 }
@@ -206,7 +206,7 @@ optional<vector<Statement>> Parser::parseFunctionBody()
 
         if (!expectOperator(";").has_value())
         {
-            throw runtime_error("Expected ';' at end of statement.");
+            throw runtime_error("Expected ';' at end of statement.at line no " + to_string(mCurrentToken->mLineNumber));
         }
     }
 
@@ -256,7 +256,7 @@ optional<Statement> Parser::expectOneValue()
         result = expectExpression();
         if (!expectOperator(")").has_value())
         {
-            throw runtime_error("Unbalanced '(' in parenthesized expression.");
+            throw runtime_error("Unbalanced '(' in parenthesized expression.at line no " + to_string(mCurrentToken->mLineNumber));
         }
     }
     if (!result.has_value())
@@ -320,7 +320,7 @@ optional<Statement> Parser::expectFunctionCall()
         optional<Statement> parameter = expectExpression();
         if (!parameter.has_value())
         {
-            throw runtime_error("Expected expression as parameter.");
+            throw runtime_error("Expected expression as parameter.at line no " + to_string(mCurrentToken->mLineNumber));
         }
         functionCall.mParameters.push_back(parameter.value());
 
@@ -331,7 +331,7 @@ optional<Statement> Parser::expectFunctionCall()
         if (!expectOperator(",").has_value())
         {
             // TODO: Check whether we still have a current token.
-            throw runtime_error(string("Expected ',' to separate parameters, found '") + mCurrentToken->mText + "'.");
+            throw runtime_error(string("Expected ',' to separate parameters, found '") + mCurrentToken->mText + "'." +"at line no " + to_string(mCurrentToken->mLineNumber));
         }
     }
 
