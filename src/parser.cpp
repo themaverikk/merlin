@@ -227,7 +227,7 @@ optional<Statement> Parser::expectOneValue()
     if (mCurrentToken != mEndToken && mCurrentToken->mType == DOUBLE_LITERAL)
     {
         Statement doubleLiteralStatement;
-        doubleLiteralStatement.mKind = StatementKind::LITERAL;
+        doubleLiteralStatement.mKind = StatementKind::DOUBLE_LITERAL;
         doubleLiteralStatement.mName = mCurrentToken->mText;
         doubleLiteralStatement.mType = Type("double", DOUBLE);
         result = doubleLiteralStatement;
@@ -236,7 +236,7 @@ optional<Statement> Parser::expectOneValue()
     else if (mCurrentToken != mEndToken && mCurrentToken->mType == INTEGER_LITERAL)
     {
         Statement integerLiteralStatement;
-        integerLiteralStatement.mKind = StatementKind::LITERAL;
+        integerLiteralStatement.mKind = StatementKind::INT_LITERAL;
         integerLiteralStatement.mName = mCurrentToken->mText;
         integerLiteralStatement.mType = Type("signed integer", INT32);
         result = integerLiteralStatement;
@@ -245,7 +245,7 @@ optional<Statement> Parser::expectOneValue()
     else if (mCurrentToken != mEndToken && mCurrentToken->mType == STRING_LITERAL)
     {
         Statement stringLiteralStatement;
-        stringLiteralStatement.mKind = StatementKind::LITERAL;
+        stringLiteralStatement.mKind = StatementKind::STRING_LITERAL;
         stringLiteralStatement.mName = mCurrentToken->mText;
         stringLiteralStatement.mType = Type("string", UINT8);
         result = stringLiteralStatement;
