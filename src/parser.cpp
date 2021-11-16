@@ -320,7 +320,7 @@ optional<Statement> Parser::expectFunctionCall()
         optional<Statement> parameter = expectExpression();
         if (!parameter.has_value())
         {
-            throw runtime_error("Expected expression as parameter.at line no " + to_string(mCurrentToken->mLineNumber));
+            throw runtime_error("Expected expression as parameter. at line no " + to_string(mCurrentToken->mLineNumber));
         }
         functionCall.mParameters.push_back(parameter.value());
 

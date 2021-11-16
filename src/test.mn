@@ -1,1 +1,5 @@
-5+(9/2) * 7 ;
+foo = 1.5;
+someFunction(foo);
+foo = 8+9*7+89-7;
+
+function
