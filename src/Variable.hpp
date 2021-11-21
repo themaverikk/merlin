@@ -1,17 +1,17 @@
-using namespace std;
+#pragma once
 #include <string.h>
 #include "Type.hpp"
-typedef union Value
-{
-    int INT;
-    string STRING;
-    double DOUBLE;
-} variableValue;
+
+using namespace std;
 class Variable
 {
 public:
+    string mName;
     Type type;
-    variableValue value;
-
+    long long INT;
+    long double DOUBLE;
+    string STRING;
+    void debugPrint() const;
 private:
+
 };

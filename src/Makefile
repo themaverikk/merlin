@@ -9,7 +9,7 @@ current_dir=$(shell pwd)
 	@$(CXX) $(CXXFLAGS) $< -o $(current_dir)/out/$@
 
 merlin : clean
-	@$(CXX) $(CXXFLAGS) merlin.cpp FunctionDefinition.cpp Tokenizer.cpp Parser.cpp Statement.cpp -o merlin
+	@$(CXX) $(CXXFLAGS) merlin.cpp FunctionDefinition.cpp Tokenizer.cpp Parser.cpp Statement.cpp Interpreter.cpp Variable.cpp -o merlin
 	@tput setaf 2; echo "BUILD COMPLETE.";tput sgr0
 	@echo "Run the merlin executable with the mn file as argument . i.e. ./merlin test.mn"
 all: createOutputDir $(OBJ) 

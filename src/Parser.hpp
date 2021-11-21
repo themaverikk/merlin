@@ -4,6 +4,7 @@
 #include "Type.hpp"
 #include "FunctionDefinition.hpp"
 #include "Statement.hpp"
+#include "Interpreter.hpp"
 #include <optional>
 #include <string>
 #include <map>
@@ -15,10 +16,9 @@
     class Parser {
     public:
         Parser();
-
         void parse(vector<Token> &tokens);
-
         void debugPrint() const;
+        map<string, FunctionDefinition> mFunctions;
 
     private:
         optional<Type> expectType();
@@ -34,7 +34,7 @@
         vector<Token>::iterator mCurrentToken;
         vector<Token>::iterator mEndToken;
         map<string, Type> mTypes;
-        map<string, FunctionDefinition> mFunctions;
+
 
         optional<vector<Statement>> parseFunctionBody();
 

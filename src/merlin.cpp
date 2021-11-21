@@ -1,7 +1,9 @@
 #include "Tokenizer.hpp"
 #include "Parser.hpp"
+#include "Interpreter.hpp"
 #include <iostream>
 #include <vector>
+using namespace std;
 int main(int argc, char **args)
 {
     try
@@ -37,6 +39,9 @@ int main(int argc, char **args)
         parser.parse(tokens);
 
         parser.debugPrint();
+        Interpretor interpreter;
+        interpreter.interpreat(parser.mFunctions["main"].mStatements);
+        interpreter.debugPrint();
     }
     catch (exception &err)
     {
@@ -48,6 +53,6 @@ int main(int argc, char **args)
         cerr << "Unknown Error." << endl;
         return 3;
     }
-
+    
     return 0;
 }
