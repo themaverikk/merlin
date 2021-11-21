@@ -14,7 +14,8 @@ static map<string, OperatorEntry> sOperators{
     {"+", OperatorEntry{"+", 1}},
     {"-", OperatorEntry{"-", 1}},
     {"/", OperatorEntry{"/", 10}},
-    {"*", OperatorEntry{"*", 10}}};
+    {"*", OperatorEntry{"*", 10}},
+    {"%", OperatorEntry{"%",10}}};
 
 bool Parser::expectFunctionDefinition()
 {

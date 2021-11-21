@@ -69,11 +69,13 @@ optional<Variable> Interpretor::expressionValue(Statement statement)
         optional<Variable> rhs = expressionValue(statement.mParameters[1]);
         if (lhs.has_value() && rhs.has_value())
         {
-            if(compatibleTypeforOperation(lhs.value().type,rhs.value().type,statement.mName)){
-                return oprateOnVaribles(lhs.value(),rhs.value(),statement.mName);
+            if (compatibleTypeforOperation(lhs.value().type, rhs.value().type, statement.mName))
+            {
+                return oprateOnVaribles(lhs.value(), rhs.value(), statement.mName);
             }
         }
     }
+    return nullopt;
 }
 
 void Interpretor::debugPrint() const
@@ -96,13 +98,136 @@ void Interpretor::interpreat(vector<Statement> statements)
 }
 // To do
 // complete this function
-bool Interpretor::compatibleTypeforOperation(Type type1,Type type2,string op){
+bool Interpretor::compatibleTypeforOperation(Type type1, Type type2, string op)
+{
     return true;
 };
 
-Variable Interpretor::oprateOnVaribles(Variable var1,Variable var2,string op){
-    if(op=="+"){
-        var1.INT +=var2.INT;
+Variable Interpretor::oprateOnVaribles(Variable var1, Variable var2, string op)
+{
+    if (op == "+")
+    {
+        if (var1.type.mName == "STRING")
+        {
+            var1.STRING += var2.STRING;
+            return var1;
+        }
+        double finalValue = 0;
+        bool isDouble = false;
+
+        if (var1.type.mName == "INT")
+            finalValue += var1.INT;
+        else
+        {
+            finalValue += var1.DOUBLE;
+            isDouble = true;
+        }
+
+        if (var2.type.mName == "INT")
+            finalValue += var2.INT;
+        else
+        {
+            finalValue += var2.DOUBLE;
+            isDouble = true;
+        }
+        if (isDouble)
+        {
+            var1.type = Type("DOUBLE", BUILTIN_TYPE::DOUBLE);
+            var1.DOUBLE = finalValue;
+            return var1;
+        }
+        var1.type = Type("INT", BUILTIN_TYPE::INT);
+        var1.INT = (long long)finalValue;
+        return var1;
+    }
+    if (op == "-")
+    {
+        double finalValue = 0;
+        bool isDouble = false;
+        if (var1.type.mName == "INT")
+            finalValue += var1.INT;
+        else
+        {
+            finalValue += var1.DOUBLE;
+            isDouble = true;
+        }
+        if (var2.type.mName == "INT")
+            finalValue -= var2.INT;
+        else
+        {
+            finalValue -= var2.DOUBLE;
+            isDouble = true;
+        }
+        if (isDouble)
+        {
+            var1.type = Type("DOUBLE", BUILTIN_TYPE::DOUBLE);
+            var1.DOUBLE = finalValue;
+            return var1;
+        }
+        var1.type = Type("INT", BUILTIN_TYPE::INT);
+        var1.INT = (long long)finalValue;
+        return var1;
+    }
+    if (op == "*")
+    {
+        double finalValue = 0;
+        bool isDouble = false;
+        if (var1.type.mName == "INT")
+            finalValue += var1.INT;
+        else
+        {
+            finalValue += var1.DOUBLE;
+            isDouble = true;
+        }
+        if (var2.type.mName == "INT")
+            finalValue *= var2.INT;
+        else
+        {
+            finalValue *= var2.DOUBLE;
+            isDouble = true;
+        }
+        if (isDouble)
+        {
+            var1.type = Type("DOUBLE", BUILTIN_TYPE::DOUBLE);
+            var1.DOUBLE = finalValue;
+            return var1;
+        }
+        var1.type = Type("INT", BUILTIN_TYPE::INT);
+        var1.INT = (long long)finalValue;
+        return var1;
+    }
+    if (op == "/")
+    {
+        double finalValue = 0;
+        bool isDouble = false;
+        if (var1.type.mName == "INT")
+            finalValue += var1.INT;
+        else
+        {
+            finalValue += var1.DOUBLE;
+            isDouble = true;
+        }
+        if (var2.type.mName == "INT")
+            finalValue /= var2.INT;
+        else
+        {
+            finalValue /= var2.DOUBLE;
+            isDouble = true;
+        }
+        if (isDouble)
+        {
+            var1.type = Type("DOUBLE", BUILTIN_TYPE::DOUBLE);
+            var1.DOUBLE = finalValue;
+            return var1;
+        }
+        var1.type = Type("INT", BUILTIN_TYPE::INT);
+        var1.INT = (long long)finalValue;
+        return var1;
+    }
+    if (op == "%")
+    {
+        var1.type = Type("INT", BUILTIN_TYPE::INT);
+        var1.INT = var1.INT%var2.INT;
         return var1;
     }
 };

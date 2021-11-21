@@ -105,6 +105,7 @@ vector<Token> Tokenizer::parse(const std::string &inProgram)
         case '*':
         case ';':
         case ',':
+        case '%':
             if (currentToken.mType != STRING_LITERAL)
             {
                 endToken(currentToken, tokens);
