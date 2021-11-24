@@ -18,5 +18,5 @@ private:
     optional<Variable> expressionValue(Statement statement);
     void returnValue(Statement Statement);
     bool compatibleTypeforOperation(Type type1,Type type2,string op);
-    Variable oprateOnVaribles(Variable var1,Variable var2,string op);
+    optional<Variable>  oprateOnVaribles(Variable var1,Variable var2,string op);
 };

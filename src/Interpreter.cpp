@@ -65,7 +65,10 @@ optional<Variable> Interpretor::expressionValue(Statement statement)
     }
     if (statement.mKind == StatementKind::VARIABLE)
     {
-        return mVariables[statement.mName];
+        if(mVariables.find(statement.mName) != mVariables.end()){
+            return mVariables[statement.mName];
+        };
+        throw runtime_error("Varible \"" +statement.mName + "\" used before decleration");
     }
     if (statement.mKind == StatementKind::OPERATOR_CALL)
     {
@@ -107,7 +110,7 @@ bool Interpretor::compatibleTypeforOperation(Type type1, Type type2, string op)
     return true;
 };
 
-Variable Interpretor::oprateOnVaribles(Variable var1, Variable var2, string op)
+optional<Variable> Interpretor::oprateOnVaribles(Variable var1, Variable var2, string op)
 {
     if (op == "+")
     {
@@ -234,4 +237,5 @@ Variable Interpretor::oprateOnVaribles(Variable var1, Variable var2, string op)
         var1.INT = var1.INT%var2.INT;
         return var1;
     }
+    return nullopt;
 };
