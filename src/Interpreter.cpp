@@ -86,7 +86,7 @@ optional<Variable> Interpretor::expressionValue(Statement statement)
 }
 
 void Interpretor::debugPrint() const
-{
+{   cout << "VARIABLES AFTER INTERPRETATION" <<endl; 
     for (auto variables : mVariables)
     {
         variables.second.debugPrint();

@@ -362,7 +362,6 @@ optional<Statement> Parser::expectExpression()
 { 
     vector<Token>::iterator startToken = mCurrentToken;
     optional<Statement> lhs = expectOneValue();
-    cout << lhs.value().mName <<endl;
     //checking if the lhs is part of varible assignment or expression
     if(expectOperator("=").has_value()){
         mCurrentToken = startToken;

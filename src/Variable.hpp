@@ -1,7 +1,7 @@
 #pragma once
 #include <string.h>
+#include <iostream>
 #include "Type.hpp"
-
 using namespace std;
 class Variable
 {

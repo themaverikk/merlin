@@ -37,11 +37,18 @@ int main(int argc, char **args)
 
         Parser parser;
         parser.parse(tokens);
-
-        parser.debugPrint();
+        // cout << "Parser Tree Starts Here:" << endl;
+        // cout << "--------------------------------------------------------------------------" << endl;
+        // parser.debugPrint();
+        // cout << "--------------------------------------------------------------------------" << endl;
+        // cout << "Parser Tree Ends Here:" << endl;
         Interpretor interpreter;
         interpreter.interpreat(parser.mFunctions["main"].mStatements);
+        cout << "Interpreted Results" << endl;
+        cout << "--------------------------------------------------------------------------" << endl;
         interpreter.debugPrint();
+        cout << "--------------------------------------------------------------------------" << endl;
+        cout << "END OF PROGRAM" <<endl;
     }
     catch (exception &err)
     {
@@ -53,6 +60,6 @@ int main(int argc, char **args)
         cerr << "Unknown Error." << endl;
         return 3;
     }
-    
+
     return 0;
 }
