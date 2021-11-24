@@ -63,6 +63,10 @@ optional<Variable> Interpretor::expressionValue(Statement statement)
         newVariable.mName = statement.mName;
         return newVariable;
     }
+    if (statement.mKind == StatementKind::VARIABLE)
+    {
+        return mVariables[statement.mName];
+    }
     if (statement.mKind == StatementKind::OPERATOR_CALL)
     {
         optional<Variable> lhs = expressionValue(statement.mParameters[0]);

@@ -14,7 +14,8 @@ enum class StatementKind : int
     INT_LITERAL,
     DOUBLE_LITERAL,
     STRING_LITERAL,
-    OPERATOR_CALL
+    OPERATOR_CALL,
+    VARIABLE,
 };
 
 static const char *sStatementKindStrings[] = {
@@ -24,7 +25,8 @@ static const char *sStatementKindStrings[] = {
     "INT_LITERAL",
     "DOUBLE_LITERAL",
     "STRING_LITERAL",
-    "OPERATOR_CALL"
+    "OPERATOR_CALL",
+    "VARIABLE"
     };
 
 class Statement

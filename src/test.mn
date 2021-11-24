@@ -1,1 +1,5 @@
-foo = 7+2.9;
+foo = 7-2.9;
+arjunName = "arjun " + " lather";
+a = 8*9.7;
+b = 8.9-6.1*2;
+foo = foo + 2.9;

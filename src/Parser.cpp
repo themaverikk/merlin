@@ -252,6 +252,15 @@ optional<Statement> Parser::expectOneValue()
         result = stringLiteralStatement;
         ++mCurrentToken;
     }
+    else if (mCurrentToken != mEndToken && mCurrentToken->mType == IDENTIFIER)
+    {
+        Statement stringLiteralStatement;
+        stringLiteralStatement.mKind = StatementKind::VARIABLE;
+        stringLiteralStatement.mName = mCurrentToken->mText;
+        stringLiteralStatement.mType = Type();
+        result = stringLiteralStatement;
+        ++mCurrentToken;
+    }
     else if (expectOperator("(").has_value())
     {
         result = expectExpression();
@@ -350,8 +359,19 @@ optional<Statement> Parser::expectStatement()
 }
 
 optional<Statement> Parser::expectExpression()
-{
+{ 
+    vector<Token>::iterator startToken = mCurrentToken;
     optional<Statement> lhs = expectOneValue();
+    cout << lhs.value().mName <<endl;
+    //checking if the lhs is part of varible assignment or expression
+    if(expectOperator("=").has_value()){
+        mCurrentToken = startToken;
+        return nullopt;
+    }
+    if(expectOperator("(").has_value()){
+        mCurrentToken = startToken;
+        return expectFunctionCall();
+    }
     if (!lhs.has_value())
     {
         return nullopt;
